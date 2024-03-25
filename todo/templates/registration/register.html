@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Registration</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #eeede8;
+        }
+        .registration-box {
+            width: 300px;
+            padding: 20px;
+            background-color: #e56161;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        .registration-box button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .registration-box button:hover {
+            background-color: #0056b3;
+        }
+        .registration-box a {
+            text-decoration: none;
+            color: #0e1012;
+            margin: 10px;
+        }
+        .registration-box a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-box">
+        <form method="post">
+            {% csrf_token %}
+            <h2>Account Registration</h2>
+            <label for="id_username">Username:</label><br>
+            <input type="text" id="id_username" name="username" value="{{ form.username.value }}"><br><br>
+            <label for="id_password1">Password:</label><br>
+            <input type="password" id="id_password1" name="password1"><br><br>
+            <label for="id_password2">Password confirmation:</label><br>
+            <input type="password" id="id_password2" name="password2"><br><br>
+            <input type="submit" value="Create Account"><br><br>
+            <a href="{% url 'login' %}">Already have an account? Login here</a>
+        </form>
+    </div>
+</body>
+</html>

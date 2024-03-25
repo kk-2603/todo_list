@@ -1,0 +1,78 @@
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #eeede8;
+        }
+        .login-box {
+            width: 300px;
+            padding: 20px;
+            background-color: #e36161;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #34d825;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        .login-box a {
+            text-decoration: none;
+            color: #0f1112;
+            margin: 10px;
+        }
+        .login-box a:hover {
+            text-decoration: underline;
+        }
+        /* Google Login Button Styles */
+        .google-login {
+            display: inline-block;
+            background-color: #db4437;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .google-login:hover {
+            background-color: #cc372c;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <form method="post">
+            {% csrf_token %}
+            <h2>Login</h2>
+            <label for="id_username">Username:</label><br>
+            <input type="text" id="id_username" name="username" value="{{ form.username.value }}"><br><br>
+            <label for="id_password">Password:</label><br>
+            <input type="password" id="id_password" name="password"><br><br>
+            <input type="submit" value="Login"><br><br>
+            <a href="{% url 'register' %}">Create new account</a><br>
+            <a href="{% url 'password_reset' %}">Forgot password</a><br><br>
+        </form>
+        <!-- Google Login Button -->
+        <a href="{% provider_login_url 'google' %}" class="google-login">Login with Google</a>
+    </div>
+</body>
+</html>

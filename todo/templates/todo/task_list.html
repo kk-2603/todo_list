@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task List</title>
+</head>
+<body>
+    <div style="display: flex; align-items: center;">
+        <h1 style="color: #333;">Task List</h1>
+        <form action="{% url 'logout' %}" method="post" style="margin-left: auto;">
+            {% csrf_token %}
+            <button type="submit" style="background-color: #dc3545; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Logout</button>
+        </form>
+    </div>
+
+    <div class="task-container">
+        {% for task in tasks %}
+        <div class="task" style="background-color: #f0f0f0; margin-bottom: 10px; padding: 10px; border-radius: 5px;">
+            <div style="display: flex; justify-content: space-between;">
+                <div style="color: #333;">
+                    <span>{{ task.title }} - {{ task.description }} - {{ task.due_date }}</span>
+                </div>
+                <div>
+                    <form action="{% url 'task_update' task.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" style="background-color: #007bff; color: #fff; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Update</button>
+                    </form>
+                    <form action="{% url 'task_delete' task.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" style="background-color: #007bff; color: #fff; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <form action="{% url 'task_create' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" style="background-color: #28a745; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Create Task</button>
+    </form>
+</body>
+</html>
